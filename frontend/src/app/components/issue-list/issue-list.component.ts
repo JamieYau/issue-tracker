@@ -51,11 +51,11 @@ export class IssueListComponent implements OnInit {
   }
 
   deleteIssue(id: number): void {
-    this.issueService.deleteIssue(id).subscribe(
-      () => {
+    this.issueService.deleteIssue(id).subscribe({
+      next: () => {
         this.issues = this.issues.filter((issue) => issue.id !== id);
       },
-      (error) => console.error('Error deleting issue:', error)
-    );
+      error: (error) => console.error('Error deleting issue:', error),
+    });
   }
 }
