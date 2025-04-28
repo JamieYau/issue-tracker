@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>Issue Tracker</h2>
+
+  <!-- Create Issue Form -->
+  <div class="create-issue">
+    <h3>Create New Issue</h3>
+    <form (ngSubmit)="createIssue()">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          [(ngModel)]="newIssue.title"
+          name="title"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          id="description"
+          [(ngModel)]="newIssue.description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+      <button type="submit">Create Issue</button>
+    </form>
+  </div>
+
+  <!-- Issues List -->
+  <div class="issues-list">
+    <h3>Issues</h3>
+    <div *ngIf="issues.length === 0" class="no-issues">
+      No issues found. Create one above!
+    </div>
+    <div *ngFor="let issue of issues" class="issue-card">
+      <h4>{{ issue.title }}</h4>
+      <p>{{ issue.description }}</p>
+      <div class="issue-meta">
+        <span class="status">Status: {{ issue.status }}</span>
+        <span class="date">Created: {{ issue.createdDate | date }}</span>
+      </div>
+      <button (click)="deleteIssue(issue.id)" class="delete-btn">Delete</button>
+    </div>
+  </div>
+</div>

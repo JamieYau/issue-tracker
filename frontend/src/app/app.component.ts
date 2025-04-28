@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { IssueListComponent } from './components/issue-list/issue-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [IssueListComponent],
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'issue-tracker';
 }
