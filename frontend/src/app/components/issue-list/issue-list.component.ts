@@ -28,15 +28,15 @@ export class IssueListComponent implements OnInit {
   }
 
   loadIssues(): void {
-    this.issueService.getIssues().subscribe(
-      (issues) => (this.issues = issues),
-      (error) => console.error('Error loading issues:', error)
-    );
+    this.issueService.getIssues().subscribe({
+      next: (issues) => (this.issues = issues),
+      error: (error) => console.error('Error loading issues:', error),
+    });
   }
 
   createIssue(): void {
-    this.issueService.createIssue(this.newIssue).subscribe(
-      (issue) => {
+    this.issueService.createIssue(this.newIssue).subscribe({
+      next: (issue) => {
         this.issues.push(issue);
         this.newIssue = {
           id: 0,
@@ -46,8 +46,8 @@ export class IssueListComponent implements OnInit {
           createdDate: new Date(),
         };
       },
-      (error) => console.error('Error creating issue:', error)
-    );
+      error: (error) => console.error('Error creating issue:', error),
+    });
   }
 
   deleteIssue(id: number): void {
