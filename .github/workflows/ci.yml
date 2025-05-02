@@ -43,13 +43,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore backend dependencies
-        working-directory: ./backend
+        working-directory: ./issue-tracker-backend
         run: dotnet restore
 
       - name: Build backend
-        working-directory: ./backend
+        working-directory: ./issue-tracker-backend
         run: dotnet build --configuration Release
 
       - name: Run backend tests
-        working-directory: ./backend
+        working-directory: ./issue-tracker-backend
         run: dotnet test
