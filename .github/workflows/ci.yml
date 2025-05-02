@@ -34,7 +34,7 @@ jobs:
 
       - name: Run tests
         working-directory: ./frontend
-        run: npm test:ci
+        run: npm run test:ci
 
       # Backend setup
       - name: Setup .NET
