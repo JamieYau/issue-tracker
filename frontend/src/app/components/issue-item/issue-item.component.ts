@@ -10,9 +10,9 @@ import { Issue } from '../../models/issue';
   imports: [CommonModule],
 })
 export class IssueItemComponent {
-  issue = input.required<Issue>();
+  issue = input.required<Issue>(); //prop from parent
   isEditing = input<boolean>(false);
 
-  edit = output<Issue>();
+  edit = output<Issue>(); // child to parent
   delete = output<number>();
 }
