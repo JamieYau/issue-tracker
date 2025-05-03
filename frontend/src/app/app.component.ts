@@ -10,5 +10,5 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet, HeaderComponent],
 })
 export class AppComponent {
-  title = 'issue-tracker';
+  title = 'Issue Tracker';
 }

@@ -4,7 +4,7 @@ import { IssueComponent } from './components/issue/issue.component';
 import { BoardViewComponent } from './components/board-view/board-view.component';
 
 export const routes: Routes = [
-  { path: '', component: IssueListComponent, pathMatch: 'full' },
+  { path: '', redirectTo: '/issues', pathMatch: 'full' },
   { path: 'issues', component: IssueListComponent },
   { path: 'issues/:id', component: IssueComponent },
   { path: 'board', component: BoardViewComponent },
