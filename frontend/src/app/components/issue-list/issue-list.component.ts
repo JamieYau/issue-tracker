@@ -21,8 +21,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
 })
 export class IssueListComponent implements OnInit {
-  private issueService = inject(IssueService);
-  private destroyRef = inject(DestroyRef); // Inject DestroyRef
+  private readonly issueService = inject(IssueService);
+  private readonly destroyRef = inject(DestroyRef); // Inject DestroyRef
 
   issues = signal<Issue[]>([]);
   editingIssue = signal<Issue | null>(null);

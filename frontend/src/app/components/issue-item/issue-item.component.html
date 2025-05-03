@@ -1,27 +1,39 @@
-<div class="d-flex justify-content-between align-items-center">
-  <div>
+<div
+  class="d-flex justify-content-between align-items-center"
+  style="cursor: pointer"
+  (click)="onIssueClick()"
+  [attr.aria-label]="'View details for issue: ' + issue().title"
+>
+  <div class="issue-content">
     <h5 class="mb-1">{{ issue().title }}</h5>
     <p class="mb-1">{{ issue().description }}</p>
     <div class="text-secondary">
-      <small class="status">
-        Status: {{ issue().status }} |
-      </small>
+      <span
+        class="status badge"
+        [ngClass]="{
+          'bg-success': issue().status === 'Closed',
+          'bg-warning': issue().status === 'In Progress',
+          'bg-info': issue().status === 'Open'
+        }"
+      >
+        {{ issue().status }}
+      </span>
       <small class="createdAt">
         Created:
         {{ issue().createdDate | date }}
       </small>
     </div>
   </div>
-  <div>
+  <div class="issue-actions">
     <button
-      (click)="edit.emit(issue())"
+      (click)="onEditClick($event)"
       class="btn btn-outline-primary btn-sm me-2"
       aria-label="Edit"
     >
       Edit
     </button>
     <button
-      (click)="delete.emit(issue().id)"
+      (click)="onDeleteClick($event)"
       class="btn btn-outline-danger btn-sm"
       aria-label="Delete"
     >
