@@ -3,32 +3,9 @@
     <h3 class="mb-0">Create New Issue</h3>
   </div>
   <div class="card-body">
-    <form (ngSubmit)="createIssue()" class="row g-3">
-      <div class="col-md-6">
-        <label for="title" class="form-label">Title</label>
-        <input
-          type="text"
-          id="title"
-          [(ngModel)]="newIssue.title"
-          name="title"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="col-md-12">
-        <label for="description" class="form-label">Description</label>
-        <textarea
-          id="description"
-          [(ngModel)]="newIssue.description"
-          name="description"
-          class="form-control"
-          required
-        ></textarea>
-      </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Create Issue</button>
-      </div>
-    </form>
+    <app-issue-create-form
+      (create)="onIssueCreated($event)"
+    ></app-issue-create-form>
   </div>
 </div>
 
@@ -37,29 +14,25 @@
     <h3 class="mb-0">Issues</h3>
   </div>
   <ul class="list-group list-group-flush">
-    <li
-      *ngIf="issues.length === 0"
-      class="list-group-item text-center text-muted"
-    >
+    @if (issues.length === 0) {
+    <li class="list-group-item text-center text-muted">
       No issues found. Create one above!
     </li>
-    <li *ngFor="let issue of issues" class="list-group-item">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <h5 class="mb-1">{{ issue.title }}</h5>
-          <p class="mb-1">{{ issue.description }}</p>
-          <small class="text-secondary"
-            >Status: {{ issue.status }} | Created:
-            {{ issue.createdDate | date }}</small
-          >
-        </div>
-        <button
-          (click)="deleteIssue(issue.id)"
-          class="btn btn-outline-danger btn-sm"
-        >
-          Delete
-        </button>
-      </div>
+    } @for (issue of issues(); track issue.id) {
+    <li class="list-group-item">
+      <app-issue-item
+        *ngIf="editingIssue()?.id !== issue.id"
+        [issue]="issue"
+        (edit)="onEditIssue($event)"
+        (delete)="onDeleteIssue($event)"
+      ></app-issue-item>
+      <app-issue-edit-form
+        *ngIf="editingIssue()?.id === issue.id && editingIssue()"
+        [issue]="editingIssue()!"
+        (save)="onUpdateIssue($event)"
+        (cancel)="onCancelEdit()"
+      ></app-issue-edit-form>
     </li>
+    }
   </ul>
 </div>

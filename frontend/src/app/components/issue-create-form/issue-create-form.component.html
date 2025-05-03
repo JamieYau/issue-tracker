@@ -1,0 +1,40 @@
+<form (ngSubmit)="onCreate()" class="row g-3">
+  <div class="col-md-6">
+    <label for="create-title" class="form-label">Title</label>
+    <input
+      type="text"
+      id="create-title"
+      [(ngModel)]="newIssue().title"
+      name="title"
+      class="form-control"
+      required
+    />
+  </div>
+  <div class="col-md-12">
+    <label for="create-description" class="form-label">Description</label>
+    <textarea
+      id="create-description"
+      [(ngModel)]="newIssue().description"
+      name="description"
+      class="form-control"
+      required
+    ></textarea>
+  </div>
+  <div class="col-md-6">
+    <label for="create-status" class="form-label">Status</label>
+    <select
+      id="create-status"
+      [(ngModel)]="newIssue().status"
+      name="status"
+      class="form-select"
+      required
+    >
+      <option value="Open">Open</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Closed">Closed</option>
+    </select>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Create Issue</button>
+  </div>
+</form>

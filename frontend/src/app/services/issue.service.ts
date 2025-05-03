@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Issue } from '../models/issue';
@@ -8,8 +8,7 @@ import { Issue } from '../models/issue';
 })
 export class IssueService {
   private apiUrl = 'https://localhost:7211/api/issues';
-
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient)
 
   getIssues(): Observable<Issue[]> {
     return this.http.get<Issue[]>(this.apiUrl);
