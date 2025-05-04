@@ -7,6 +7,7 @@ import { IssueEditFormComponent } from '../issue-edit-form/issue-edit-form.compo
 import { IssueCreateFormComponent } from '../issue-create-form/issue-create-form.component';
 import { catchError, of } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-issue-list',
@@ -18,6 +19,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     IssueItemComponent,
     IssueEditFormComponent,
     IssueCreateFormComponent,
+    ModalComponent
   ],
 })
 export class IssueListComponent implements OnInit {

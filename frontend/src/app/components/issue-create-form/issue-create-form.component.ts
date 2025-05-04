@@ -20,9 +20,11 @@ export class IssueCreateFormComponent {
   });
 
   create = output<Issue>();
+  close = output<void>();
 
   onCreate(): void {
     this.create.emit(this.newIssue());
+    this.close.emit();
     this.resetForm();
   }
 

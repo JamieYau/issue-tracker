@@ -1,0 +1,37 @@
+<!-- Modal backdrop -->
+@if (isVisible) {
+<div class="modal-backdrop fade show" (click)="hide()"></div>
+}
+
+<!-- Modal dialog -->
+@if (isVisible) {
+<div
+  class="modal fade show d-block"
+  tabindex="-1"
+  role="dialog"
+  [attr.aria-labelledby]="title() ? title() + 'Label' : null"
+  aria-hidden="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h5 class="modal-title" [id]="title() ? title() + 'Label' : null">
+          {{ title() }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="hide()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+      <div class="modal-footer">
+        <ng-content select="[modal-footer]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+}

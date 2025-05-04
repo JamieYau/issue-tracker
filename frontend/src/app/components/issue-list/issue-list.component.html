@@ -1,13 +1,22 @@
-<div class="card mb-4">
-  <div class="card-header">
-    <h3 class="mb-0">Create New Issue</h3>
+<button (click)="createModal.show()" class="btn btn-primary mb-4">
+  Create New Issue
+</button>
+
+<app-modal [title]="'Create Issue'" #createModal>
+  <app-issue-create-form
+    (create)="onIssueCreated($event)"
+    (close)="createModal.hide()"
+  ></app-issue-create-form>
+  <div modal-footer>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="createModal.hide()"
+    >
+      Cancel
+    </button>
   </div>
-  <div class="card-body">
-    <app-issue-create-form
-      (create)="onIssueCreated($event)"
-    ></app-issue-create-form>
-  </div>
-</div>
+</app-modal>
 
 <div class="card">
   <div class="card-header">
