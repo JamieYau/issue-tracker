@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IssueService } from '../../services/issue.service';
 import { Issue } from '../../models/issue';
@@ -19,10 +19,13 @@ import { ModalComponent } from '../modal/modal.component';
     IssueItemComponent,
     IssueEditFormComponent,
     IssueCreateFormComponent,
-    ModalComponent
+    ModalComponent,
   ],
 })
 export class IssueListComponent implements OnInit {
+  @ViewChild('createModal') createModal!: ModalComponent;
+  @ViewChild('editModal') editModal!: ModalComponent;
+
   private readonly issueService = inject(IssueService);
   private readonly destroyRef = inject(DestroyRef); // Inject DestroyRef
 
@@ -51,6 +54,7 @@ export class IssueListComponent implements OnInit {
     this.issueService.createIssue(issue).subscribe({
       next: (createdIssue) => {
         this.issues.update((issues) => [...issues, createdIssue]);
+        this.createModal.hide();
       },
       error: (error) => console.error('Error creating issue:', error),
     });
@@ -58,6 +62,7 @@ export class IssueListComponent implements OnInit {
 
   onEditIssue(issue: Issue): void {
     this.editingIssue.set({ ...issue });
+    this.editModal.show();
   }
 
   onUpdateIssue(updatedIssue: Issue): void {
@@ -71,6 +76,7 @@ export class IssueListComponent implements OnInit {
           )
         );
         this.editingIssue.set(null);
+        this.editModal.hide();
       },
       error: (error) => console.error('Error updating issue:', error),
     });
@@ -78,6 +84,7 @@ export class IssueListComponent implements OnInit {
 
   onCancelEdit(): void {
     this.editingIssue.set(null);
+    this.editModal.hide();
   }
 
   onDeleteIssue(id: number): void {

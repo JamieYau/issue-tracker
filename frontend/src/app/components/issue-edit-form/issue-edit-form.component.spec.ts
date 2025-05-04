@@ -54,13 +54,4 @@ describe('IssueEditFormComponent', () => {
     saveButton.click();
     expect(component.save.emit).toHaveBeenCalledWith(mockIssue);
   });
-
-  it('should emit cancel event when cancel button is clicked', () => {
-    spyOn(component.cancel, 'emit');
-    const cancelButton = fixture.debugElement.nativeElement.querySelector(
-      'button[type="button"]'
-    );
-    cancelButton.click();
-    expect(component.cancel.emit).toHaveBeenCalled();
-  });
 });

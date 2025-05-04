@@ -12,15 +12,9 @@ import { Issue } from '../../models/issue';
 })
 export class IssueEditFormComponent {
   issue = input.required<Issue>();
-
   save = output<Issue>();
-  cancel = output<void>();
 
   onSave(): void {
     this.save.emit(this.issue());
-  }
-
-  onCancel(): void {
-    this.cancel.emit();
   }
 }
