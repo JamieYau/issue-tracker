@@ -16,6 +16,7 @@ describe('IssueComponent', () => {
   let fixture: ComponentFixture<IssueComponent>;
   let issueService: IssueService;
   let router: Router;
+  let consoleSpy: jasmine.Spy;
 
   const mockIssue: Issue = {
     id: 1,
@@ -26,6 +27,8 @@ describe('IssueComponent', () => {
   };
 
   beforeEach(async () => {
+    consoleSpy = spyOn(console, 'error');
+
     await TestBed.configureTestingModule({
       imports: [IssueComponent],
       providers: [
@@ -76,6 +79,10 @@ describe('IssueComponent', () => {
     expect(component.issue()).toBeNull();
     expect(component.isLoading()).toBeFalse();
     expect(component.error()).toBe(errorMessage);
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error loading issue:',
+      jasmine.any(Error)
+    );
   });
 
   it('should handle invalid issue ID', () => {
