@@ -1,37 +1,52 @@
-<div class="card mb-4">
-  <div class="card-header">
-    <h3 class="mb-0">Create New Issue</h3>
+<button (click)="createModal.show()" class="btn btn-primary mb-4">
+  Create New Issue
+</button>
+
+<app-modal [title]="'Create Issue'" #createModal>
+  <app-issue-create-form
+    (create)="onIssueCreated($event)"
+  ></app-issue-create-form>
+  <div modal-footer>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="createModal.hide()"
+    >
+      Cancel
+    </button>
   </div>
-  <div class="card-body">
-    <app-issue-create-form
-      (create)="onIssueCreated($event)"
-    ></app-issue-create-form>
+</app-modal>
+
+<app-modal [title]="'Edit Issue'" #editModal>
+  @if (editingIssue()) {
+  <app-issue-edit-form
+    [issue]="editingIssue()!"
+    (save)="onUpdateIssue($event)"
+  ></app-issue-edit-form>
+  }
+  <div modal-footer>
+    <button type="button" class="btn btn-secondary" (click)="editModal.hide()">
+      Cancel
+    </button>
   </div>
-</div>
+</app-modal>
 
 <div class="card">
   <div class="card-header">
     <h3 class="mb-0">Issues</h3>
   </div>
   <ul class="list-group list-group-flush">
-    @if (issues.length === 0) {
+    @if (issues().length === 0) {
     <li class="list-group-item text-center text-muted">
       No issues found. Create one above!
     </li>
     } @for (issue of issues(); track issue.id) {
     <li class="list-group-item">
       <app-issue-item
-        *ngIf="editingIssue()?.id !== issue.id"
         [issue]="issue"
         (edit)="onEditIssue($event)"
         (delete)="onDeleteIssue($event)"
       ></app-issue-item>
-      <app-issue-edit-form
-        *ngIf="editingIssue()?.id === issue.id && editingIssue()"
-        [issue]="editingIssue()!"
-        (save)="onUpdateIssue($event)"
-        (cancel)="onCancelEdit()"
-      ></app-issue-edit-form>
     </li>
     }
   </ul>

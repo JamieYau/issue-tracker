@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { IssueListComponent } from './components/issue-list/issue-list.component';
+import { HeaderComponent } from './components/header/header.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [IssueListComponent],
+  imports: [RouterOutlet, HeaderComponent],
 })
 export class AppComponent {
-  title = 'issue-tracker';
+  title = 'Issue Tracker';
 }

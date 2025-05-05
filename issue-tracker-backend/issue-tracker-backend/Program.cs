@@ -1,7 +1,15 @@
+using issue_tracker_backend.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddDbContext<IssueTrackerContext>(options =>
+{ 
+    var connectionString = builder.Configuration["ConnectionStrings:AzureSQL"];
+    options.UseSqlServer(connectionString);
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

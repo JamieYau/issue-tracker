@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using IssueTracker.Models;
+using issue_tracker_backend.Services;
+using issue_tracker_backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace issue_tracker_backend.Controllers
 {
@@ -7,19 +10,23 @@ namespace issue_tracker_backend.Controllers
     [Route("api/[controller]")]
     public class IssuesController : ControllerBase
     {
-        private static List<Issue> _issues = new List<Issue>();
-        private static int _nextId = 1;
+        private readonly IssueTrackerContext context;
+
+        public IssuesController(IssueTrackerContext context)
+        {
+            this.context = context;
+        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Issue>> GetAll()
+        public async Task<ActionResult<IEnumerable<Issue>>> GetAll()
         {
-            return Ok(_issues);
+            return await context.Issues.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Issue> GetById(int id)
+        public async Task<ActionResult<Issue>> GetById(int id)
         {
-            var issue = _issues.FirstOrDefault(i => i.Id == id);
+            var issue = await context.Issues.FindAsync(id);
             if (issue == null)
             {
                 return NotFound();
@@ -28,41 +35,49 @@ namespace issue_tracker_backend.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Issue> Create(Issue issue)
+        public async Task<ActionResult<Issue>> Create(IssueDto issueDto)
         {
-            issue.Id = _nextId++;
-            issue.CreatedDate = DateTime.Now;
-            _issues.Add(issue);
+            var issue = new Issue 
+            { 
+                Title = issueDto.Title, 
+                Description = issueDto.Description,
+                Status = issueDto.Status,
+                CreatedDate = DateTime.UtcNow,
+            };
+            context.Issues.Add(issue);
+            await context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = issue.Id }, issue);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Issue updatedIssue)
+        public async Task<IActionResult> Update(int id, IssueDto issueDto)
         {
-            var existingIssue = _issues.FirstOrDefault(i => i.Id == id);
-            if (existingIssue == null)
-            {
-                return NotFound();
-            }
-
-            existingIssue.Title = updatedIssue.Title;
-            existingIssue.Description = updatedIssue.Description;
-            existingIssue.Status = updatedIssue.Status;
-            existingIssue.UpdatedDate = DateTime.Now;
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var issue = _issues.FirstOrDefault(i => i.Id == id);
+            var issue = context.Issues.Find(id);
             if (issue == null)
             {
                 return NotFound();
             }
 
-            _issues.Remove(issue);
+            issue.Title = issueDto.Title;
+            issue.Description = issueDto.Description;
+            issue.Status = issueDto.Status;
+            issue.UpdatedDate = DateTime.UtcNow;
+
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var issue = context.Issues.Find(id);
+            if (issue == null)
+            {
+                return NotFound();
+            }
+
+            context.Issues.Remove(issue);
+            await context.SaveChangesAsync();
             return NoContent();
         }
     }
