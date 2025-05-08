@@ -9,6 +9,7 @@ namespace issue_tracker_backend.Services
         {
         }
 
+        // tables
         public required DbSet<Issue> Issues { get; set; }
         // public DbSet<User> Users { get; set; }
     }

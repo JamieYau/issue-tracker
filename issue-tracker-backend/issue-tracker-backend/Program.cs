@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<IssueTrackerContext>(options =>
 { 
-    var connectionString = builder.Configuration["ConnectionStrings:AzureSQL"];
+    var connectionString = builder.Configuration["ConnectionStrings:Local"];
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddControllers();

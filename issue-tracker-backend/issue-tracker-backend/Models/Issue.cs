@@ -4,7 +4,7 @@ namespace IssueTracker.Models
 {
     public class Issue
     {
-        public int Id { get; set; }
+        public int IssueId { get; set; }
         public required string Title { get; set; } = "";
         public required string Description { get; set; } = "";
         public required string Status { get; set; } = "Open";

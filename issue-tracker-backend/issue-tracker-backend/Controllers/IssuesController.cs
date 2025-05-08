@@ -46,7 +46,7 @@ namespace issue_tracker_backend.Controllers
             };
             context.Issues.Add(issue);
             await context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = issue.Id }, issue);
+            return CreatedAtAction(nameof(GetById), new { id = issue.IssueId }, issue);
         }
 
         [HttpPut("{id}")]

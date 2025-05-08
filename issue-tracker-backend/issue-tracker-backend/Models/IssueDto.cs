@@ -4,7 +4,7 @@ namespace issue_tracker_backend.Models
 {
     public class IssueDto
     {
-        public int Id { get; set; }
+        public int IssueId { get; set; }
         [Required]
         public required string Title { get; set; } = "";
         [Required]
