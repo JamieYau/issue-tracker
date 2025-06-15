@@ -13,6 +13,7 @@ import { Issue } from '../../models/issue';
 export class IssueItemComponent {
   issue = input.required<Issue>(); //prop from parent
   isEditing = input<boolean>(false);
+  boardView = input<boolean>(false);
 
   edit = output<Issue>(); // child to parent
   delete = output<number>();
@@ -20,7 +21,7 @@ export class IssueItemComponent {
   private readonly router = inject(Router);
 
   onIssueClick(): void {
-    this.router.navigate(['/issues', this.issue().id]);
+    this.router.navigate(['/issues', this.issue().issueId]);
   }
 
   onEditClick(event: MouseEvent): void {
@@ -30,6 +31,6 @@ export class IssueItemComponent {
 
   onDeleteClick(event: MouseEvent): void {
     event.stopPropagation();
-    this.delete.emit(this.issue().id);
+    this.delete.emit(this.issue().issueId);
   }
 }

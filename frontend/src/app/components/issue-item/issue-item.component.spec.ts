@@ -11,7 +11,7 @@ describe('IssueItemComponent', () => {
   let datePipe: DatePipe;
 
   const mockIssue: Issue = {
-    id: 1,
+    issueId: 1,
     title: 'Test Issue',
     description: 'Test Description',
     status: 'Open',
@@ -52,7 +52,7 @@ describe('IssueItemComponent', () => {
       'button[aria-label="Delete"]'
     );
     deleteButton.click();
-    expect(component.delete.emit).toHaveBeenCalledWith(mockIssue.id);
+    expect(component.delete.emit).toHaveBeenCalledWith(mockIssue.issueId);
   });
 
   it('should display issue details correctly', () => {

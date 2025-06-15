@@ -1,4 +1,11 @@
-import { Component, DestroyRef, OnInit, ViewChild, inject, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IssueService } from '../../services/issue.service';
 import { Issue } from '../../models/issue';
@@ -66,20 +73,22 @@ export class IssueListComponent implements OnInit {
   }
 
   onUpdateIssue(updatedIssue: Issue): void {
-    this.issueService.updateIssue(updatedIssue.id, updatedIssue).subscribe({
-      next: () => {
-        this.issues.update((issues) =>
-          issues.map((issue) =>
-            issue.id === updatedIssue.id
-              ? { ...updatedIssue, updatedDate: new Date() }
-              : issue
-          )
-        );
-        this.editingIssue.set(null);
-        this.editModal.hide();
-      },
-      error: (error) => console.error('Error updating issue:', error),
-    });
+    this.issueService
+      .updateIssue(updatedIssue.issueId, updatedIssue)
+      .subscribe({
+        next: () => {
+          this.issues.update((issues) =>
+            issues.map((issue) =>
+              issue.issueId === updatedIssue.issueId
+                ? { ...updatedIssue, updatedDate: new Date() }
+                : issue
+            )
+          );
+          this.editingIssue.set(null);
+          this.editModal.hide();
+        },
+        error: (error) => console.error('Error updating issue:', error),
+      });
   }
 
   onCancelEdit(): void {
@@ -91,7 +100,7 @@ export class IssueListComponent implements OnInit {
     this.issueService.deleteIssue(id).subscribe({
       next: () => {
         this.issues.update((issues) =>
-          issues.filter((issue) => issue.id !== id)
+          issues.filter((issue) => issue.issueId !== id)
         );
       },
       error: (error) => console.error('Error deleting issue:', error),

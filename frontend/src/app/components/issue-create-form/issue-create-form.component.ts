@@ -12,7 +12,7 @@ import { Issue } from '../../models/issue';
 })
 export class IssueCreateFormComponent {
   newIssue = signal<Issue>({
-    id: 0,
+    issueId: 0,
     title: '',
     description: '',
     status: 'Open',
@@ -30,7 +30,7 @@ export class IssueCreateFormComponent {
 
   private resetForm(): void {
     this.newIssue.set({
-      id: 0,
+      issueId: 0,
       title: '',
       description: '',
       status: 'Open',

@@ -40,7 +40,7 @@
     <li class="list-group-item text-center text-muted">
       No issues found. Create one above!
     </li>
-    } @for (issue of issues(); track issue.id) {
+    } @for (issue of issues(); track issue.issueId) {
     <li class="list-group-item">
       <app-issue-item
         [issue]="issue"

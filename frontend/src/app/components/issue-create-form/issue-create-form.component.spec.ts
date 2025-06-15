@@ -47,7 +47,7 @@ describe('IssueCreateFormComponent', () => {
     form.dispatchEvent(new Event('submit'));
 
     expect(component.create.emit).toHaveBeenCalledWith({
-      id: 0,
+      issueId: 0,
       title: newIssue.title,
       description: newIssue.description,
       status: newIssue.status,

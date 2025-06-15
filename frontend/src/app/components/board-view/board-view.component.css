@@ -1,0 +1,130 @@
+.board-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.board {
+  display: flex;
+  gap: 1rem;
+  height: calc(100vh - 120px);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.board-column {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.issue-count {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #495057;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-width: 24px;
+  text-align: center;
+}
+
+.column-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  min-height: 200px;
+}
+
+.issue-card {
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.issue-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.issue-card:last-child {
+  margin-bottom: 0;
+}
+
+.empty-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  border: 2px dashed #dee2e6;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+.empty-column p {
+  margin: 0;
+  font-style: italic;
+}
+
+/* CDK Drag & Drop Styles */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  transform: rotate(2deg);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.5;
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cdk-drag-placeholder::before {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .issue-card:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-receiving {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .board {
+    flex-direction: column;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .board-column {
+    min-width: auto;
+    max-height: 400px;
+  }
+
+  .board-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+}
