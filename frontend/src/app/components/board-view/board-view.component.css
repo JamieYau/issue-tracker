@@ -48,6 +48,7 @@
 
 .issue-card:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: grab;
 }
 
 .issue-card:last-child {
@@ -58,10 +59,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  min-height: 132px;
   border: 2px dashed #dee2e6;
   border-radius: 6px;
   background-color: #fafafa;
+  margin-bottom: 0.75rem;
 }
 
 .empty-column p {
@@ -76,18 +78,12 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   background-color: white;
   transform: rotate(2deg);
+  cursor: grabbing !important;
 }
 
 .cdk-drag-placeholder {
   opacity: 0.5;
-  background-color: #f8f9fa;
-  border: 2px dashed #dee2e6;
-  border-radius: 6px;
   margin-bottom: 0.75rem;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .cdk-drag-placeholder::before {
