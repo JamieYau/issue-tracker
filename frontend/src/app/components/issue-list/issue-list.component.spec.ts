@@ -20,14 +20,14 @@ describe('IssueListComponent', () => {
 
   const mockIssues: Issue[] = [
     {
-      id: 1,
+      issueId: 1,
       title: 'Test Issue 1',
       description: 'Test Description 1',
       status: 'Open',
       createdDate: new Date(),
     },
     {
-      id: 2,
+      issueId: 2,
       title: 'Test Issue 2',
       description: 'Test Description 2',
       status: 'In Progress',
@@ -88,7 +88,7 @@ describe('IssueListComponent', () => {
 
   it('should hide create modal after issue creation', () => {
     const newIssue: Issue = {
-      id: 0,
+      issueId: 0,
       title: 'New Issue',
       description: 'New Description',
       status: 'Open',

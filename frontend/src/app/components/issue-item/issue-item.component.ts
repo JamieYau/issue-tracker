@@ -11,11 +11,10 @@ import { Issue } from '../../models/issue';
   imports: [CommonModule],
 })
 export class IssueItemComponent {
-  issue = input.required<Issue>(); //prop from parent
+  issue = input.required<Issue>();
   isEditing = input<boolean>(false);
-  boardView = input<boolean>(false);
 
-  edit = output<Issue>(); // child to parent
+  edit = output<Issue>();
   delete = output<number>();
 
   private readonly router = inject(Router);

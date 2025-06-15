@@ -34,13 +34,12 @@
         } @else { @for (issue of getIssuesForStatus(column.status); track
         issue.issueId) {
         <div class="issue-card" cdkDrag [cdkDragData]="issue">
-          <app-issue-item
+          <app-board-issue-card
             [issue]="issue"
             (edit)="onEditIssue($event)"
             (delete)="onDeleteIssue($event)"
-            [boardView]="true"
           >
-          </app-issue-item>
+          </app-board-issue-card>
         </div>
         } }
       </div>

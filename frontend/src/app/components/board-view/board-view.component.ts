@@ -5,12 +5,11 @@ import {
   ViewChild,
   inject,
   signal,
-  computed,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IssueService } from '../../services/issue.service';
 import { Issue } from '../../models/issue';
-import { IssueItemComponent } from '../issue-item/issue-item.component';
+import { BoardIssueCardComponent } from '../board-issue-card/board-issue-card.component';
 import { IssueEditFormComponent } from '../issue-edit-form/issue-edit-form.component';
 import { IssueCreateFormComponent } from '../issue-create-form/issue-create-form.component';
 import { catchError, of } from 'rxjs';
@@ -32,7 +31,7 @@ export type IssueStatus = 'Open' | 'In Progress' | 'Closed';
   standalone: true,
   imports: [
     CommonModule,
-    IssueItemComponent,
+    BoardIssueCardComponent,
     IssueEditFormComponent,
     IssueCreateFormComponent,
     ModalComponent,

@@ -19,7 +19,7 @@ describe('IssueComponent', () => {
   let consoleSpy: jasmine.Spy;
 
   const mockIssue: Issue = {
-    id: 1,
+    issueId: 1,
     title: 'Test Issue',
     description: 'Test Description',
     status: 'Open',
